@@ -58,7 +58,7 @@ router.post('/', (req, res) => {
 });
 
 
-// How to test a put request: GET data, edit data but no ID. Then put the edited datas ID in the URL and make a put request
+// How to test a put request: GET data, edit data but not ID. Then put the edited datas ID in the URL and make a put request
 // {
 //     "id": 1,
 //      "name": "xxxxxxxxxxxxxxxxxx"   
@@ -115,20 +115,6 @@ router.get('/:id/posts', (req, res) => {
 });
 
 
-
-
-
-
-//  post-model.js helper function for reference:
-
-// function insert(post) {
-//     return db('posts') // TODO: add user id
-//       .insert(post) // returns id
-//       .then(ids => { // ids is an array of the inserted ids
-//         return getById(ids[0]); // returns the inserted post
-//       });
-//   }
-
 // RETURN THE NEWLY CREATED USER POST
 // this needs a middleware to verify user id
 // and another middleware to check that the request body is valid
@@ -161,26 +147,6 @@ router.post('/:id/posts', (req, res) => {
         });
 });
 
-
-
-
-
-
-
-
-// router.post('/:id/posts', (req, res) => {
-//     const postData = { ...req.body, user_id: req.params.id };
-//     Posts.insert(postData)
-//         .then(post => {
-//             res.status(201).json(post);
-//         })
-//         .catch(error => {
-//             res.status(500).json({
-//                 message: 'broken',
-//                 error: error.message,
-//             });
-//         });
-// })
 
 
 module.exports = router;
