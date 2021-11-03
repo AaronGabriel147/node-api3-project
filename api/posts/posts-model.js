@@ -18,13 +18,21 @@ function getById(id) {
     .first();
 }
 
+
+
+
+
 function insert(post) {
-  return db('posts')
-    .insert(post)
-    .then(ids => {
-      return getById(ids[0]);
+  return db('posts') // TODO: add user id
+    .insert(post) // returns id
+    .then(ids => { // ids is an array of the inserted ids
+      return getById(ids[0]); // returns the inserted post
     });
 }
+
+
+
+
 
 function update(id, changes) {
   return db('posts')
