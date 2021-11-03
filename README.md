@@ -8,6 +8,14 @@ In this challenge, you build an API and write custom middleware that satisfies t
 
 Your assignment page on Canvas should contain instructions for submitting this project. If you are still unsure, reach out to School Staff.
 
+
+
+
+
+
+
+
+
 ### Task 2: Minimum Viable Product
 
 - Wire the application together completing `api/server.js` and `index.js`.
@@ -19,7 +27,7 @@ Your assignment page on Canvas should contain instructions for submitting this p
 
 - `logger()`
 
-  - `logger` logs to the console the following information about each request: request method, request url, and a timestamp
+  - logger logs to the console the following information about each request: request method, request url, and a timestamp
   - this middleware runs on every request made to the API
 
 - `validateUserId()`
@@ -38,6 +46,8 @@ Your assignment page on Canvas should contain instructions for submitting this p
   - `validatePost` validates the `body` on a request to create a new post
   - if the request `body` lacks the required `text` field, respond with status `400` and `{ message: "missing required text field" }`
 
+
+
 ### Database Persistence Helpers
 
 There are two helper files that you can use to manage the persistence of _users_ and _posts_ data. These files are `api/users/users-model.js` and `api/posts/posts-model.js`. Both files publish the following api:
@@ -50,7 +60,11 @@ There are two helper files that you can use to manage the persistence of _users_
 
 The `users-model.js` includes an extra method called `getUserPosts()` that when passed a user's `id`, returns a list of all the `posts` for the `user`.
 
+
 **All helper methods return a promise.**
+
+
+
 
 #### Database Schemas
 
@@ -80,6 +94,9 @@ We have provided test data for the resources.
 - You are welcome to create additional files but **do not move or rename existing files** or folders.
 - Do not alter your `package.json` file except to install additional libraries or add additional scripts. **Do not update existing libs**.
 - In your solution, it is essential that you follow best practices and produce clean and professional results.
+
+
+
 
 ### Task 3: Stretch Goal
 
