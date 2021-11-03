@@ -13,15 +13,12 @@ Your assignment page on Canvas should contain instructions for submitting this p
 
 
 
-
-
-
 ### Task 2: Minimum Viable Product
 
-- Wire the application together completing `api/server.js` and `index.js`.
+[x] - Wire the application together completing `api/server.js` and `index.js`.
 - Write four custom middleware functions detailed below, in `api/middleware/middleware.js`.
 - Use the custom middlewares in their appropriate places in the application (specific endpoints, entire routes or globally).
-- There are endpoints in `users-router.js` to retrieve the list of `posts` by a `user` and to store a new `post` for a `user`.
+[x] - There are endpoints in `users-router.js` to retrieve the list of `posts` by a `user` and to store a new `post` for a `user`.
 
 #### Custom Middleware Requirements
 
@@ -66,7 +63,7 @@ The `users-model.js` includes an extra method called `getUserPosts()` that when 
 
 
 
-#### Database Schemas
+#### Database Schemas // Not 100% sure what this means exactly. 
 
 The _Database Schemas_ for the `users` and `posts` resources are:
 
@@ -90,10 +87,10 @@ We have provided test data for the resources.
 #### Important Notes
 
 - Reset the database by executing `npm run resetdb`.
-- Test your work manually using Postman or HTTPie. Run automatic tests by executing `npm test`.
+- Test your work manually using a HTTP CLient.
+- Run automatic tests by executing `npm test`.
 - You are welcome to create additional files but **do not move or rename existing files** or folders.
 - Do not alter your `package.json` file except to install additional libraries or add additional scripts. **Do not update existing libs**.
-- In your solution, it is essential that you follow best practices and produce clean and professional results.
 
 
 

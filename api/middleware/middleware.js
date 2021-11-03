@@ -1,5 +1,6 @@
 
 
+server.use(logger); // log all requests to the console
 
 function logger(req, res, next) {
   // logger logs to the console the following information about each request: request method, request url, and a timestamp
@@ -8,6 +9,9 @@ function logger(req, res, next) {
   // console.log("req", req.method);
   // console.log(`Your path is ${req.url} and your verb is ${req.method}`);
   // next();
+
+  console.log(`${req.method} request for '${req.url}' - ${JSON.stringify(req.body)}`);
+  next(); // must call next to move on to the next middleware
 
 }
 
@@ -37,3 +41,4 @@ function validatePost(req, res, next) {
 
 
 // do not forget to expose these functions to other modules
+module.exports = { logger, validateUserId, validateUser, validatePost };

@@ -132,7 +132,22 @@ router.get('/:id/posts', (req, res) => {
 // RETURN THE NEWLY CREATED USER POST
 // this needs a middleware to verify user id
 // and another middleware to check that the request body is valid
-// const newPost = req.body
+// const newPost = req.body // something I tried. 
+
+//  I was stck for 1.5 hours because I was entering the wrong json object into the HTTP client.
+//  I did not have user_id in the json object. It must be like this:
+// NOTE that the user_id must match the user_id in the URL. --> http://localhost:5000/api/users/2/posts
+// {
+//     "user_id": 2,
+//     "text": "Not su,re how to test this POST"
+// }
+
+//  I had it like this:
+// {
+//     "text": "Not sure how to test this POST",
+//     "postedBy": "Nobody"
+// }
+
 router.post('/:id/posts', (req, res) => {
     const newPost = { user_id: req.params.id, ...req.body }
     console.log(newPost)
@@ -153,49 +168,19 @@ router.post('/:id/posts', (req, res) => {
 
 
 
-
-// router.post("/:id/posts", (req, res) => {
-//     const newPost = { ...req.body, user_id: req.params.id };
-//     Posts.insert(newPost)
-//         .then((post) => res.status(201).json(post))
-//         .catch((err) => {
-//             console.log(err);
-//             res.status(500).json({ message: "Something went wrong" });
+// router.post('/:id/posts', (req, res) => {
+//     const postData = { ...req.body, user_id: req.params.id };
+//     Posts.insert(postData)
+//         .then(post => {
+//             res.status(201).json(post);
+//         })
+//         .catch(error => {
+//             res.status(500).json({
+//                 message: 'broken',
+//                 error: error.message,
+//             });
 //         });
-// });
-
-
-
-
-
-
-
-
-
-// try {
-//     const end = await Post.insert({
-//       user_id: req.params.id,
-//       text: req.body.text,
-//     });
-//     res.status(201).json(end);
-
-
-// //__________________________________________
-
-//     const postInfo = {...req.body, user_id: req.params.id}
-//     Post.insert(postInfo)
-//     .then(post => {
-//       res.status(200).json(post)
-//     })
-//     .catch(error => {
-//       res.status(500).json({ message: error.message})
-//     })
-
-
-
-
-
-
+// })
 
 
 module.exports = router;
