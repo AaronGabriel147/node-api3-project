@@ -8,18 +8,17 @@ module.exports = {
   remove,
 };
 
+
 function get() {
   return db('posts');
 }
+
 
 function getById(id) {
   return db('posts')
     .where({ id })
     .first();
 }
-
-
-
 
 
 function insert(post) {
@@ -31,14 +30,12 @@ function insert(post) {
 }
 
 
-
-
-
 function update(id, changes) {
   return db('posts')
     .where({ id })
     .update(changes);
 }
+
 
 function remove(id) {
   return db('posts')

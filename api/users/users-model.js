@@ -13,7 +13,7 @@ function get() {
   return db('users');
 }
 
-function getById(id) {
+function getById(id) { // returns the user with the given id
   return db('users')
     .where({ id })
     .first();

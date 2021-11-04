@@ -1,12 +1,10 @@
 
-// You will need `users-model.js` and `posts-model.js`
-// The middleware functions also need to be required
-
+// You will need `users-model.js` and `posts-model.js`. 
 const express = require('express');
 const router = express.Router();
 
 // import models
-const Users = require('./users-model') //  Name this model what you want.
+const Users = require('./users-model') //  Name these model what you want.
 const Posts = require('../posts/posts-model')
 // get,            // get all users
 // getById,        // get by id
@@ -15,20 +13,23 @@ const Posts = require('../posts/posts-model')
 // update,         // update user
 // remove,         // remove user
 
+// middleware
+const { validateUserId, validateUser, validatePost } = require('../middleware/middleware') // ctrl space bar on exports to get them
+
+
 
 // GET all users (connected)
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
     Users.get()
         .then(users => {
             res.json(users);
         })
-        .catch(err => {
-            res.status(500).json({ error: 'something went wrong' });
-        });
+        .catch(next);
 });
 
+
 // GET user by id (connected)
-router.get('/:id', (req, res) => {
+router.get('/:id', validateUserId, (req, res, next) => {
     // RETURN THE USER OBJECT
     // this needs a middleware to verify user id
     Users.getById(req.params.id)
@@ -39,22 +40,19 @@ router.get('/:id', (req, res) => {
                 res.status(404).json({ message: 'user not found' });
             }
         })
-        .catch(err => {
-            res.status(500).json({ error: 'something went wrong' });
-        });
+        .catch(next);
 });
 
+
 // GET user posts (connected)
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
     // RETURN THE NEWLY CREATED USER OBJECT
     // this needs a middleware to check that the request body is valid
     Users.insert(req.body)
         .then(user => {
             res.status(201).json(user);
         })
-        .catch(err => {
-            res.status(500).json({ error: 'something went wrong' });
-        });
+        .catch(next);
 });
 
 
@@ -64,7 +62,7 @@ router.post('/', (req, res) => {
 //      "name": "xxxxxxxxxxxxxxxxxx"   
 // }
 // PUT user by id (connected)
-router.put('/:id', (req, res) => {
+router.put('/:id', (req, res, next) => {
     // RETURN THE FRESHLY UPDATED USER OBJECT
     // this needs a middleware to verify user id
     // and another middleware to check that the request body is valid
@@ -76,16 +74,14 @@ router.put('/:id', (req, res) => {
                 res.status(404).json({ message: 'user not found' });
             }
         })
-        .catch(err => {
-            res.status(500).json({ error: 'something went wrong' });
-        });
+        .catch(next);
 });
 
 
 //  How to test a delete: get all data, add the param ID to the URL, make a delete request. Then get all and see how many are left
 //  DELETE user by id (connected)
 //  Remove just take one param.
-router.delete('/:id', (req, res) => {
+router.delete('/:id', (req, res, next) => {
     // RETURN THE FRESHLY DELETED USER OBJECT
     // this needs a middleware to verify user id
     Users.remove(req.params.id)
@@ -96,22 +92,19 @@ router.delete('/:id', (req, res) => {
                 res.status(404).json({ message: 'user not found' });
             }
         })
-        .catch(err => {
-            res.status(500).json({ error: 'something went wrong' });
-        })
+        .catch(next);
 })
 
+
 // GET user posts (connected)
-router.get('/:id/posts', (req, res) => {
+router.get('/:id/posts', (req, res, next) => {
     // RETURN THE ARRAY OF USER POSTS
     // this needs a middleware to verify user id
     Users.getUserPosts(req.params.id)
         .then(posts => {
             res.status(200).json(posts);
         })
-        .catch(err => {
-            res.status(500).json({ error: 'something went wrong with getting posts' });
-        })
+        .catch(next);
 });
 
 
@@ -134,7 +127,8 @@ router.get('/:id/posts', (req, res) => {
 //     "postedBy": "Nobody"
 // }
 
-router.post('/:id/posts', (req, res) => {
+
+router.post('/:id/posts', (req, res, next) => {
     const newPost = { user_id: req.params.id, ...req.body }
     console.log(newPost)
     Posts.insert(newPost)
@@ -142,11 +136,8 @@ router.post('/:id/posts', (req, res) => {
             console.log('.then log', post)
             res.status(201).json(post);
         })
-        .catch(err => {
-            res.status(500).json({ error: 'something went wrong' });
-        });
+        .catch(next);
 });
-
 
 
 module.exports = router;

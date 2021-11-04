@@ -17,13 +17,13 @@ Your assignment page on Canvas should contain instructions for submitting this p
 
 [x] - Wire the application together completing `api/server.js` and `index.js`.
 - Write four custom middleware functions detailed below, in `api/middleware/middleware.js`.
-- Use the custom middlewares in their appropriate places in the application (specific endpoints, entire routes or globally).
+[x] - Use the custom middlewares in their appropriate places in the application (specific endpoints, entire routes or globally).
 [x] - There are endpoints in `users-router.js` to retrieve the list of `posts` by a `user` and to store a new `post` for a `user`.
 
 #### Custom Middleware Requirements
 
-- `logger()`
-
+- [x] `logger()`
+ 
   - logger logs to the console the following information about each request: request method, request url, and a timestamp
   - this middleware runs on every request made to the API
 
