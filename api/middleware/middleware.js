@@ -26,54 +26,47 @@ function logger(req, res, next) {
 
 
 
-// LEFT OFF AT 120:00 of Gabriels video... TIME TO EAT DINNER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 function validateUserId(req, res, next) {
   Users.getById(req.params.id)
-    .then(user => {
-      if (user) {
-        req.user = user;
+    .then(possibleUser => {
+      if (possibleUser) {
+        req.user = possibleUser;
         next();
       } else {
-        next({ status: 404, message: 'User ID not found' })
+        next({ status: 404, message: 'User ID not found (middleware error)' })
       }
     })
     .catch(next)
-
 }
-
-// router.get('/:id', (req, res, next) => {
-//   Users.getById(req.params.id)
-//       .then(user => {
-//           if (user) {
-//               res.status(200).json(user);
-//           } 
-// });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // validateUser validates the `body` on a request to create or update a user
 // if the request `body` lacks the required `name` field, 
 // respond with status 400 and { message: "missing required name field" }
 function validateUser(req, res, next) {
+  if (!req.body.name) {
+    next({ status: 400, message: 'Missing name (middleware error!)' })
+  } else {
+    next();
+  }
 }
 
 
 
 // validatePost validates the body on a request to create a new post
-// if the request `body` lacks the required `text` field, respond with status `400` and `{ message: "missing required text field" }`
+// if the request `body` lacks the required `text` field, respond with 
+// status `400` and `{ message: "missing required text field" }`
 function validatePost(req, res, next) {
+  if (!req.body.text) {
+    next({ status: 400, message: 'Missing text (middleware error!)' })
+  } else {
+    next();
+  }
 }
+
+
+
+
 
 // do not forget to expose these functions to other modules
 module.exports = { logger, validateUserId, validateUser, validatePost };
